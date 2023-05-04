@@ -21,5 +21,5 @@ func main() {
   
   routes.UsersRoutes(api)
 
-  log.Fatal(app.Listen(":8080"))
+  log.Fatal(app.Listen(":5500"))
 }

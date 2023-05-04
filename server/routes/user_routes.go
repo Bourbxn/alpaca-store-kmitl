@@ -9,4 +9,7 @@ import (
 func UsersRoutes(router fiber.Router) {
   router.Get("/users", controllers.GetUsers)
   router.Get("/user/:id", controllers.GetUser)
+  router.Post("/user", controllers.CreateUser)
+  router.Put("/user/:id", controllers.UpdateUser)
+  router.Delete("/user/:id", controllers.DeleteUser)
 }

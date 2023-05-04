@@ -36,3 +36,40 @@ func GetUser(c *fiber.Ctx) error {
   }
   return c.Status(200).JSON(&user)
 }
+
+func CreateUser(c *fiber.Ctx) error {
+    user := new(models.User)
+    if err := c.BodyParser(user); err != nil {
+        return c.Status(503).SendString(err.Error())
+    }
+    config.Database.Create(&user)
+    return c.Status(201).JSON(user)
+}
+
+func UpdateUser(c *fiber.Ctx) error {
+    user := new(models.User)
+    id := c.Params("id")
+    if err := c.BodyParser(user); err != nil {
+        return c.Status(503).SendString(err.Error())
+    }
+    config.Database.Where("id = ?", id).Updates(&user)
+    return c.Status(200).JSON(user)
+}
+
+func DeleteUser(c *fiber.Ctx) error {
+    idStr := c.Params("id")
+    id, err := uuid.Parse(idStr)
+    if err != nil {
+      return c.Status(400).JSON(fiber.Map{
+        "message":"Invalid ID",
+      })
+    }
+    var user models.User
+    result := config.Database.Delete(&user, id)
+    if result.RowsAffected == 0 {
+        return c.SendStatus(404)
+    }
+
+    return c.SendStatus(200)
+}
+
