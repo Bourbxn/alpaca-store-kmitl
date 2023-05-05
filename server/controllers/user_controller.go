@@ -39,6 +39,7 @@ func GetUser(c *fiber.Ctx) error {
 
 func CreateUser(c *fiber.Ctx) error {
     user := new(models.User)
+    user.ID = uuid.New()
     if err := c.BodyParser(user); err != nil {
         return c.Status(503).SendString(err.Error())
     }
@@ -65,7 +66,7 @@ func DeleteUser(c *fiber.Ctx) error {
       })
     }
     var user models.User
-    result := config.Database.Delete(&user, id)
+    result := config.Database.Preload("Options").Delete(&user, id)
     if result.RowsAffected == 0 {
         return c.SendStatus(404)
     }

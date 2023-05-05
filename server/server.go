@@ -20,6 +20,7 @@ func main() {
   config.Connect()
   
   routes.UsersRoutes(api)
+  routes.ProductRoutes(api)
 
   log.Fatal(app.Listen(":5500"))
 }

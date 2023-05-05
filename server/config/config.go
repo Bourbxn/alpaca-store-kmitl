@@ -21,7 +21,7 @@ func Connect() error {
         panic(err)
     }
 
-    Database.AutoMigrate(&models.User{})
+    Database.AutoMigrate(&models.User{}, &models.Product{}, &models.ProductOption{})
 
     return nil
 }
