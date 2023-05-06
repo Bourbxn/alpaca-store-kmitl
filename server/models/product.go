@@ -11,7 +11,7 @@ type Product struct {
   Name string `json:"name"`
   Price float64 `json:"price"`
   Description string `json:"description"`
-  Options []ProductOption `json:"options,omitempty" gorm:"foreignKey:ProductID"`
+  Options []ProductOption `json:"options,omitempty" gorm:"foreignKey:ProductID;constraint:OnDelete:CASCADE;"`
 }
 
 
