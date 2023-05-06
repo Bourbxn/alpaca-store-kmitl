@@ -32,7 +32,6 @@ func GetUser(c *fiber.Ctx) error {
     return c.Status(404).JSON(fiber.Map{
       "message":"Not found User",
     })
-
   }
   return c.Status(200).JSON(&user)
 }

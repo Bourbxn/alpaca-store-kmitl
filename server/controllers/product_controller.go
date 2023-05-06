@@ -38,11 +38,6 @@ func GetProduct(c *fiber.Ctx) error {
 
 func CreateProduct(c *fiber.Ctx) error {
   product := new(models.Product)
-  product.ID = uuid.New()
-  product.Options = []models.ProductOption{{}} 
-  for i := range product.Options {
-    product.Options[i].ID = uuid.New()
-  }
   if err := c.BodyParser(product); err != nil {
     return c.Status(503).SendString(err.Error())
   }
@@ -60,7 +55,6 @@ func UpdateProduct(c *fiber.Ctx) error {
     return c.Status(200).JSON(product)
 }
 
-
 func DeleteProduct(c *fiber.Ctx) error {
     idStr := c.Params("id")
     id, err := uuid.Parse(idStr)
@@ -70,7 +64,7 @@ func DeleteProduct(c *fiber.Ctx) error {
       })
     }
     var product models.Product
-    result := config.Database.Delete(&product, id)
+    result := config.Database.Select("Options").Delete(&product, id)
     if result.RowsAffected == 0 {
         return c.SendStatus(404)
     }

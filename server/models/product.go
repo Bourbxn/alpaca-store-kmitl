@@ -14,11 +14,10 @@ type Product struct {
   Options []ProductOption `json:"options,omitempty" gorm:"foreignKey:ProductID"`
 }
 
-type ProductOption struct {
-  gorm.Model
-  ID uuid.UUID `gorm:"type:char(36);primary_key" json:"id"`
-  Name string `json:"name"`
-  Price float64 `json:"price"`
-  ProductID uuid.UUID `json:"product_id"`
+
+func (p *Product) BeforeCreate(tx *gorm.DB) (err error) {
+    p.ID = uuid.New()
+    return
 }
+
 
