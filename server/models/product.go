@@ -14,7 +14,6 @@ type Product struct {
   Options []ProductOption `json:"options,omitempty" gorm:"foreignKey:ProductID;constraint:OnDelete:CASCADE;"`
 }
 
-
 func (p *Product) BeforeCreate(tx *gorm.DB) (err error) {
     p.ID = uuid.New()
     return

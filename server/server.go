@@ -22,5 +22,5 @@ func main() {
   routes.UsersRoutes(api)
   routes.ProductRoutes(api)
 
-  log.Fatal(app.Listen(":5500"))
+  log.Fatal(app.Listen(":5050"))
 }

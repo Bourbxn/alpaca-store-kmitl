@@ -64,8 +64,7 @@ func DeleteProduct(c *fiber.Ctx) error {
       "message":"Invalid ID",
     })
   }
-  var product models.Product
-  result := config.Database.Select(clause.Associations).Delete(&product, id)
+  result := config.Database.Select(clause.Associations).Delete(&models.Product{ID: id})
   if result.RowsAffected == 0 {
     return c.SendStatus(404)
   }
