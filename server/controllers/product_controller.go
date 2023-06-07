@@ -46,22 +46,6 @@ func CreateProduct(c *fiber.Ctx) error {
   return c.Status(201).JSON(product)
 }
 
-func UpdateProduct(c *fiber.Ctx) error {
-  idStr := c.Params("id")
-  id, err := uuid.Parse(idStr)
-  if err != nil {
-    return c.Status(400).JSON(fiber.Map{
-      "message":"Invalid ID",
-    })
-  }
-  product := new(models.Product)
-  if err := c.BodyParser(product); err != nil {
-    return c.Status(503).SendString(err.Error())
-  }
-  config.Database.Where("id = ?", id).Updates(&product)
-  return c.Status(200).JSON(&product)
-}
-
 
 func DeleteProduct(c *fiber.Ctx) error {
   idStr := c.Params("id")

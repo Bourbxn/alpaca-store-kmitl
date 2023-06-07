@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar.vue";
 </script>
 
 <template>
-  <Navbar />
-  <router-view></router-view>
+  <div className="md:w-[1080px] mx-auto py-6">
+    <Navbar />
+    <router-view></router-view>
+  </div>
 </template>
