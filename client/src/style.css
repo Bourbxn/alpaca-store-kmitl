@@ -11,3 +11,8 @@
   font-family: "Noto Sans Thai", sans-serif;
   scroll-behavior: smooth;
 }
+
+.wrapper {
+  padding-left: 150px;
+  padding-right: 150px;
+}

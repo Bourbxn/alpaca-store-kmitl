@@ -3,7 +3,9 @@ import { alpaca_logo, cart, lock } from "../assets";
 </script>
 
 <template>
-  <nav className="flex justify-between items-center pb-5">
+  <nav
+    className="w-full flex justify-between items-center py-3 shadow-sm fixed top-0 wrapper"
+  >
     <router-link to="/">
       <div
         className="text-2xl font-semibold flex justify-center items-center gap-x-2"
